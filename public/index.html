@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+    <title>Simple timer</title>
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+
+    <style type="text/css">
+      #app {
+        height: 100vh;
+      }
+      .inner {
+        display: grid;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .timer {
+        font-size: 72px;
+        font-weight: bold;
+      }
+      .flex-c {
+        display: flex;
+        justify-content: center;
+      }
+      .grid-c {
+        display: grid;
+        justify-content: center;
+      }
+      .u-btn {
+        margin-top: 15px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.17.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.17.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.17.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.17.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.17.1/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+  </head>
+  <body>
+  <div id="app" :style="{ backgroundColor: bgColor }">
+    <div class="inner">
+      <div class="flex-c">
+        <input v-model="endTime" type="number" style="width: 150px;" />
+      </div>
+      <div class="grid-c" style="margin-top: 150px;">
+        <p class="timer">
+          {{`${doubleDigits(m)} : ${doubleDigits(s)}`}}
+        </p>
+        <button @click="startTimer(false)" style="width: 150px; height: 50px; display: block; margin: 0 auto;">
+          {{!userClicked ? 'Start' : 'Refresh'}}
+        </button>
+      </div>
+      <div class="flex-c">
+        <p v-if="isStopped" class="u-btn" @click="startTimer(true)">
+          Continue
+        </p>
+        <p v-else class="u-btn" @click="stopTimer">
+          Stop
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  </body>
+</html>
