@@ -64,7 +64,7 @@
           {{!userClicked ? 'Start' : 'Refresh'}}
         </button>
       </div>
-      <div class="flex-c">
+      <div v-if="userClicked" class="flex-c">
         <p v-if="isStopped" class="u-btn" @click="startTimer(true)">
           Continue
         </p>
