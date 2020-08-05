@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
 
-    <title>Simple timer</title>
+    <title>Simple Timer</title>
     <link rel="shortcut icon" href="logo.png" type="image/png">
 
     <style type="text/css">
@@ -17,7 +17,7 @@
       .inner {
         display: grid;
         justify-content: center;
-        padding-top: 50px;
+        /*padding-top: 50px;*/
       }
       .timer {
         font-size: 64px;
@@ -36,6 +36,9 @@
         text-decoration: underline;
         cursor: pointer;
       }
+      .c {
+        text-align: center;
+      }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -53,9 +56,6 @@
   <body>
   <div id="app" :style="{ backgroundColor: bgColor }">
     <div class="inner">
-      <div class="flex-c">
-        <input v-model="endTime" type="number" style="width: 150px;" />
-      </div>
       <div class="grid-c" style="margin-top: 20vh;">
         <p class="timer">
           {{`${doubleDigits(m)} : ${doubleDigits(s)}`}}
@@ -64,13 +64,21 @@
           {{!userClicked ? 'Start' : 'Refresh'}}
         </button>
       </div>
-      <div v-if="userClicked" class="flex-c">
+      <div v-if="userClicked" class="flex-c" style="margin-top: 10px;">
         <p v-if="isStopped" class="u-btn" @click="startTimer(true)">
           Continue
         </p>
         <p v-else class="u-btn" @click="stopTimer">
           Stop
         </p>
+      </div>
+      <div class="grid-c" style="padding-top: 25vh;">
+        <p class="u-btn c" @click="showSettings = !showSettings">{{showSettings ? '-' : '+'}} Settings</p>
+        <div v-if="showSettings">
+          <input v-model="endTime" type="number" style="width: 150px; margin-bottom: 10px;" />
+          <br>
+          <input id="ar" v-model="autoRefresh" type="checkbox" /> <label for="ar">Auto Refresh</label>
+        </div>
       </div>
     </div>
   </div>

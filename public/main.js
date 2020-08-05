@@ -7,6 +7,8 @@ const app = new Vue({
       endDate: 0,
       interval: '',
       bgColor: '#fff',
+      autoRefresh: true,
+      showSettings: false,
       isStopped: true,
       userClicked: false,
       m: 1,
@@ -38,7 +40,9 @@ const app = new Vue({
         this.m = 0;
         this.s = 0;
         clearInterval(this.interval);
-        this.startTimer();
+        if (this.autoRefresh) {
+          this.startTimer(false);
+        }
       } else {
         if (distance < 4) {
           if (distance > 0) {
