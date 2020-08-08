@@ -74,10 +74,11 @@
       </div>
       <div class="grid-c" style="padding-top: 25vh;">
         <p class="u-btn c" @click="showSettings = !showSettings">{{showSettings ? '-' : '+'}} Settings</p>
-        <div v-if="showSettings">
-          <input v-model="endTime" type="number" style="width: 150px; margin-bottom: 10px;" />
+        <div v-if="showSettings" style="font-size: 12px;">
+          <p style="margin-bottom: 2px;">Time (in seconds)</p>
+          <input v-model="endTime" type="number" style="width: 120px; margin-bottom: 12px;" />
           <br>
-          <input id="ar" v-model="autoRefresh" type="checkbox" /> <label for="ar">Auto Refresh</label>
+          <input id="ar" v-model="autoRefresh" type="checkbox" /> <label for="ar">Auto refresh</label>
         </div>
       </div>
     </div>

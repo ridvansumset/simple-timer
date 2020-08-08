@@ -15,6 +15,14 @@ const app = new Vue({
       s: 0,
     };
   },
+  watch: {
+    endTime() {
+      this.stopTimer();
+      this.userClicked = false;
+      this.m = Math.floor(this.endTime / 60);
+      this.s = this.endTime % 60;
+    },
+  },
   methods: {
     stopTimer() {
       clearInterval(this.interval);
