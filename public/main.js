@@ -1,7 +1,10 @@
+const MAX_VALUE = 60000;
+
 const app = new Vue({
   el: '#app',
   data() {
     return {
+      beepStyle: '2',
       endTime: 60,
       distance: 60,
       endDate: 0,
@@ -19,6 +22,7 @@ const app = new Vue({
     endTime() {
       this.stopTimer();
       this.userClicked = false;
+      this.checkEndTime();
       this.m = Math.floor(this.endTime / 60);
       this.s = this.endTime % 60;
     },
@@ -53,7 +57,9 @@ const app = new Vue({
         }
       } else {
         if (distance < 4) {
-          if (distance > 0) {
+          if (this.beepStyle === '2' && distance > 0) {
+            this.beep();
+          } else if (this.beepStyle === '1' && distance === 0) {
             this.beep();
           }
           this.bgColor = 'lightcoral';
@@ -70,6 +76,14 @@ const app = new Vue({
     beep() {
       const audio = new Audio('beep.mp3');
       audio.play();
+    },
+    checkEndTime() {
+      if (this.endTime > MAX_VALUE) {
+        this.endTime = MAX_VALUE;
+      }
+    },
+    onSelect(e) {
+      this.beepStyle = e.target.value;
     },
   },
 });
