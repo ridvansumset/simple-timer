@@ -12,7 +12,7 @@
 
     <style type="text/css">
       #app {
-        height: 100vh;
+        height: 100%;
       }
       .inner {
         display: grid;
@@ -29,6 +29,11 @@
       .grid-c {
         display: grid;
         justify-content: center;
+      }
+      .interval-count {
+        color: #ddd;
+        font-size: 40px;
+        margin-top: 50px;
       }
       .u-btn {
         font-size: 20px;
@@ -56,28 +61,38 @@
   <body>
   <div id="app" :style="{ backgroundColor: bgColor }">
     <div class="inner">
-      <div class="grid-c" style="margin-top: 20vh;">
+      <div class="grid-c" style="margin-top: 50px;">
         <p class="timer">
           {{`${doubleDigits(m)} : ${doubleDigits(s)}`}}
         </p>
-        <button @click="startTimer(false)" style="width: 150px; height: 50px; display: block; margin: 0 auto;">
+        <button @click="startWorkTimer(false)" style="width: 150px; height: 50px; display: block; margin: 0 auto;">
           {{!userClicked ? 'Start' : 'Refresh'}}
         </button>
       </div>
+
       <div v-if="userClicked" class="flex-c" style="margin-top: 10px;">
-        <p v-if="isStopped" class="u-btn" @click="startTimer(true)">
+        <p v-if="isStopped" class="u-btn" @click="isWorking ? startWorkTimer(true) : startRestTimer(true)">
           Continue
         </p>
         <p v-else class="u-btn" @click="stopTimer">
           Stop
         </p>
       </div>
-      <div class="grid-c" style="padding-top: 23vh;">
+
+      <p v-if="intervalCount > 0" class="c interval-count">
+        <span style="font-size: 32px;">Intervals:</span> {{intervalCount}}
+      </p>
+
+      <div class="grid-c" style="margin-top: 60px;">
         <p class="u-btn c" @click="showSettings = !showSettings">{{showSettings ? '-' : '+'}} Settings</p>
         <div v-if="showSettings" style="font-size: 12px;">
           <label for="end-time">Time (in seconds)</label>
           <br>
           <input id="end-time" v-model="endTime" type="number" style="width: 120px; margin-bottom: 12px;" />
+          <br>
+          <label for="rest-time">Rest time</label>
+          <br>
+          <input id="rest-time" v-model="restTime" type="number" style="width: 120px; margin-bottom: 12px;" />
           <br>
           <label for="beep-time">When to beep</label>
           <br>
