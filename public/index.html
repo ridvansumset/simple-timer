@@ -11,9 +11,6 @@
     <link rel="shortcut icon" href="logo.png" type="image/png">
 
     <style type="text/css">
-      #app {
-        height: 100%;
-      }
       .inner {
         display: grid;
         justify-content: center;
@@ -59,7 +56,7 @@
     <script defer src="/__/firebase/init.js"></script>
   </head>
   <body>
-  <div id="app" :style="{ backgroundColor: bgColor }">
+  <div id="app" :style="{ backgroundColor: bgColor, height: showSettings ? '100%' : '100vh' }">
     <div class="inner">
       <div class="grid-c" style="margin-top: 50px;">
         <p class="timer">
