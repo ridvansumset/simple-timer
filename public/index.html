@@ -41,6 +41,12 @@
       .c {
         text-align: center;
       }
+      .block {
+        display: block;
+      }
+      .mb-0 {
+        margin-bottom: 0;
+      }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -83,24 +89,25 @@
       <div class="grid-c" style="margin-top: 60px;">
         <p class="u-btn c" @click="showSettings = !showSettings">{{showSettings ? '-' : '+'}} Settings</p>
         <div v-if="showSettings" style="font-size: 12px;">
-          <label for="end-time">Time (in seconds)</label>
-          <br>
+          <label class="mb-0 block" for="end-time">Time</label>
           <input id="end-time" v-model="endTime" type="number" style="width: 120px; margin-bottom: 12px;" />
           <br>
-          <label for="rest-time">Rest time</label>
-          <br>
+          <label class="mb-0 block" for="rest-time">Rest time</label>
           <input id="rest-time" v-model="restTime" type="number" style="width: 120px; margin-bottom: 12px;" />
           <br>
-          <label for="beep-time">When to beep</label>
-          <br>
+          <label class="mb-0 block" for="beep-time">When to beep</label>
           <select id="beep-time" name="beep_time" @change="onSelect($event)">
-            <option value="2" selected="selected">Last 3 seconds</option>
-            <option value="1">At the end</option>
-            <option value="0">No beep</option>
+            <option
+              v-for="opt in [{label: 'Last 3 seconds', value: '2'}, {label: 'At the end', value: '1'}, {label: 'No beep', value: '0'}]"
+              :value="opt.value"
+              :selected="opt.value === beepStyle"
+            >
+              {{opt.label}}
+            </option>
           </select>
           <br>
           <br>
-          <input id="auto-ref" v-model="autoRefresh" type="checkbox" /> <label for="auto-ref">Auto refresh</label>
+          <input id="auto-ref" v-model="autoRefresh" type="checkbox" /> <label for="auto-ref" style="vertical-align: middle;">Auto refresh</label>
           <br>
         </div>
       </div>
