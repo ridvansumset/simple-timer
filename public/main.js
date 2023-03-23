@@ -6,7 +6,7 @@ const app = new Vue({
     return {
       isWorking: false,
       endTime: 60,
-      restTime: 10,
+      restTime: '',
       distance: 60,
       endDate: 0,
       interval: '',
@@ -14,6 +14,7 @@ const app = new Vue({
       bgColor: '#fff',
       beepStyle: '2',
       autoRefresh: true,
+      soundOn: false,
       showSettings: false,
       isStopped: true,
       userClicked: false,
@@ -101,9 +102,9 @@ const app = new Vue({
       } else {
         if (this.isWorking) {
           if (distance < 4) {
-            if (this.beepStyle === '2' && distance > 0) {
+            if (this.beepStyle === '2' && distance > 0 && this.soundOn) {
               this.beep();
-            } else if (this.beepStyle === '1' && distance === 0) {
+            } else if (this.beepStyle === '1' && distance === 0 && this.soundOn) {
               this.beep();
             }
             this.bgColor = 'lightcoral';
@@ -113,7 +114,7 @@ const app = new Vue({
         } else {
           this.bgColor = 'olivedrab';
           if (distance < 5) {
-            if (distance > 0) {
+            if (distance > 0 && this.soundOn) {
               this.tick();
             }
             // this.bgColor = 'lightpink';
